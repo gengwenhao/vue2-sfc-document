@@ -1,21 +1,21 @@
-const fs = require('fs')
+const {parseSFCFile} = require('./sfc-parser')
+const extractOptions = require('./options-extract')
 
-const babel = require('@babel/core')
-const consoleParameterPlugin = require('../plugins/console-parameter-plugin.cjs')
-const {babelParse, parse} = require('@vue/compiler-sfc')
+/**
+ * 将 VueSFC 文件中的 options 信息提取出来
+ * @param sfcFile 文件路径
+ * @returns {{methods: [], name: string, description: string, props: []}}
+ */
+function parse(sfcFile) {
+  // 解析 SFC 抽取 script 标签内容
+  const {scriptContent} = parseSFCFile(sfcFile)
 
-const {
-  template: {content: templateContent},
-  script: {content: scriptContent}
-} = parse(fs.readFileSync('./GengPropEditor.vue').toString()).descriptor
+  // 解析 script 中的 options
+  return extractOptions(scriptContent)
+}
 
-// 借助 @babel/core 的 API 可以直接调用写好的插件
-babel.transformSync(scriptContent, {
-  plugins: [consoleParameterPlugin],
-  parserOpts: {
-    sourceType: 'unambiguous',
-    plugins: ['jsx']
-  }
-})
-
-console.log(globalThis.results)
+module.exports = {
+  extractOptions,
+  parse,
+  parseSFCFile
+}
