@@ -39,30 +39,33 @@ sfcdoc scan HelloPanel.vue --output ./docs
 
 > To view more CLI commands, run sfcdoc --help on the terminal. 更多的 CLI 命令可以在终端输入 sfcdoc --help 查看
 
-### Document Type 文档格式
+### Document Type
 
-You can specify the format of the generated file.
-指定文档格式
+文档格式
 
 ```shell
+# You can specify the format of the generated file.
+# 指定文档格式
 sfcdoc scan HelloPanel.vue --output ./docs --types md pdf json docx html
 ```
 
-### Document file name 文档名称
+### Document file name
 
-When scanning only one Vue component, you can specify the name of the generated document, but the suffix is ignored.
-只扫描一个 Vue 组件时，可以指定生成的文档名称，不过后缀名会被忽略
+文档名称
 
 ```shell
+# When scanning only one Vue component, you can specify the name of the generated document, but the suffix is ignored.
+# 只扫描一个 Vue 组件时，可以指定生成的文档名称，不过后缀名会被忽略
 sfcdoc scan HelloPanel.vue --output ./docs --file hello-panel --types md pdf json docx html
 ```
 
-### Multiple documents 生成多文档
+### Multiple documents
 
-If the --multiple, -M argument is added, multiple copies of the document will be generated.
-如果补充 --multiple 或 -M 参数，文档会被生成多份
+生成多文档
 
 ```shell
+# If the --multiple, -M argument is added, multiple copies of the document will be generated.
+# 如果补充 --multiple 或 -M 参数，文档会被生成多份
 sfcdoc scan ./projectName --multiple --output ./docs --types pdf
 ```
 
