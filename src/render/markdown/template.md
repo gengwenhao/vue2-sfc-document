@@ -24,12 +24,4 @@
 
 > {{description}} 
 
-##### 参数
-
-{{#each params}}
-- val
-{{/each}}
-
----
-
 {{/each}}

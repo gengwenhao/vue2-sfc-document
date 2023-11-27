@@ -1,5 +1,6 @@
-const {getComment} = require('./utils')
 const generate = require('@babel/generator').default
+
+const {getComment} = require('./utils')
 
 /**
  * 处理 options 中的 name 字段
@@ -25,11 +26,19 @@ function propsHandler(path, results) {
       .replaceAll(': ', '\":\"')
       .replaceAll('\,\n  ', '\",\"')
       .replace('\n\}', '\"\}')
+    const childProps = JSON.parse(childNormalizeStr)
+
+    // trim child values
+    Object.entries(childProps)
+          .forEach(([k, v]) => {
+            delete childProps[k]
+            childProps[k.trim()] = v.trim()
+          })
 
     results.props.push({
       propName,
       description: getComment(prop),
-      childProps: JSON.parse(childNormalizeStr),
+      childProps,
       raw: generate(prop, {comments: false}).code || ''
     })
   })
