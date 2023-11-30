@@ -48,7 +48,7 @@ sfcdoc scan HelloPanel.vue --output ./docs
 ```shell
 # You can specify the format of the generated file.
 # 指定文档格式
-sfcdoc scan HelloPanel.vue --output ./docs --types md pdf json docx html
+sfcdoc scan HelloPanel.vue --output ./docs --types 'md,pdf,json,docx,html'
 ```
 
 ### Document file name
