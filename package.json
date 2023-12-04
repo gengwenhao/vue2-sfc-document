@@ -17,7 +17,9 @@
     "test": "test"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "docs": "dumi dev",
+    "docs:build": "dumi build"
   },
   "keywords": [
     "Vue2",
@@ -42,6 +44,8 @@
     "ora": "^6.3.1"
   },
   "devDependencies": {
+    "dumi": "^2.2.14",
+    "dumi-theme-mobile": "^2.1.2",
     "jest": "^29.7.0"
   }
 }
