@@ -1,11 +1,15 @@
 {
   "name": "vue2-sfc-document",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "解析 Vue2 SFC 自动生成文档，支持多种文档格式，包括 Markdown、Docx、PDF、HTML 等等。",
   "main": "src/index.js",
   "bin": {
     "vue-sfc-document": "node ./cli/index.js",
     "sfdoc": "./cli/index.js"
+  },
+  "homepage": "https://github.com/gengwenhao/vue2-sfc-document",
+  "repository": {
+    "url": "https://github.com/gengwenhao/vuie2-sfc-document.git"
   },
   "directories": {
     "doc": "doc",

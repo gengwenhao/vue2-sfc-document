@@ -3,7 +3,7 @@
 Parsing Vue2 SFC automatically generates documents and supports multiple document formats, including Markdown, Docx,
 PDf, HTML, and more.
 
-解析 Vue2 SFC 自动生成文档，支持多种文档格式，包括 Markdown、Docx、PDF、HTML 等等。
+解析 Vue2 SFC 自动生成文档，支持多种文档格式，包括 Markdown、DOCX、PDF、HTML 等等。
 
 [![npm](https://img.shields.io/npm/v/vue2-sfc-document.svg)](https://www.npmjs.com/package/vue2-sfc-document)
 
