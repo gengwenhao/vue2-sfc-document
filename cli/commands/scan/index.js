@@ -1,6 +1,8 @@
 const fs = require('fs')
 const path = require('path')
 
+const chalk = require('chalk')
+
 const FileManager = require('../../utils/file-manager')
 const {parser, render} = require('../../../src')
 
@@ -11,7 +13,7 @@ const optionItemsHandler = (items) => {
     .filter(v => v)
 }
 
-// 文档类型名和生成器名的映射
+// “文档类型名” 和 “渲染函数名” 的映射
 const RENDER_NAME_MAP = {
   // 'docx': 'docx',
   // 'html': 'html',
@@ -26,18 +28,29 @@ const RENDER_NAME_MAP = {
  */
 function scanHandler(program) {
   program
-    .command('scan <filePath>')
+    .command('scan <file_path>')
     .description('解析 Vue2 SFC 自动生成文档')
     .option('-f, --file <string>', '输出文档名称', '')
-    .option('-o, --output <string>', '输出目录', './')
+    .option('-o, --output <string>', '输出目录', 'docs')
     .option('-t, --types <items>', '输出文档类型 docx,html,image,json,md,pdf', optionItemsHandler)
     .option('-m, --multiple', '输出多个文档', false)
-    .action((filePath, {file, output, types, multiple}) => {
+    .action(async (filePath, {file, output, types, multiple}) => {
 
-      // 创建文档输出目录
+      // 处理路径为绝对路径
+      filePath = path.resolve(filePath)
+      output = path.resolve(output)
+
+      // 创建输出目录
       if (!fs.existsSync(output)) {
         fs.mkdirSync(output)
+        console.log(chalk.red(`创建目录：${output}`))
+      } else {
+        console.log(chalk.green(`输出目录：${output}`))
       }
+
+      // 导入 ora，用于在控制台提示进度条
+      const {default: ora} = await import('ora')
+      const spinner = ora(`扫描：${filePath}\n`).start()
 
       // 扫描 sfc 组件路径
       const vueSFCList = new FileManager(filePath)
@@ -45,12 +58,13 @@ function scanHandler(program) {
         .filter(item => item.toLowerCase().endsWith('.vue'))
 
       // 过滤无效的文档格式
-      const renderNames = (types || ['md'])
+      const renderFuncNames = (types || ['md'])
         .map(t => [RENDER_NAME_MAP[t], t])
         .filter(([renderName, typeName]) => renderName && typeName)
 
       // 生成文档
-      renderNames.forEach(([renderName, typeName]) => {
+      const outputPaths = []
+      renderFuncNames.forEach(([renderName, typeName]) => {
         // 生成多个文档
         if (multiple) {
           vueSFCList.forEach(sfc => {
@@ -64,7 +78,7 @@ function scanHandler(program) {
             const ast = parser.parse(sfc)
             render[renderName].render(ast, outputPath)
 
-            console.log(outputPath)
+            outputPaths.push(outputPath)
           })
         }
         // 生成一个文档
@@ -79,9 +93,14 @@ function scanHandler(program) {
           const data = vueSFCList.map(sfc => parser.parse(sfc))
           render[renderName].renderBatch(data, outputPath)
 
-          console.log(outputPath)
+          outputPaths.push(outputPath)
         }
       })
+
+      setTimeout(() => {
+        spinner.succeed('完成')
+        console.log(chalk.green(outputPaths.join('\n')))
+      }, 4000)
 
     })
 }

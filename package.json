@@ -36,12 +36,12 @@
     "@babel/traverse": "^7.23.4",
     "@babel/types": "^7.23.4",
     "@vue/compiler-sfc": "^3.3.9",
-    "chalk": "^5.3.0",
+    "chalk": "^4.1.2",
     "commander": "^11.0.0",
     "handlebars": "^4.7.8",
     "jimp": "^0.22.10",
     "log-symbols": "^5.1.0",
-    "ora": "^6.3.1"
+    "ora": "^7.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.23.6",

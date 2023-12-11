@@ -7,6 +7,8 @@ PDf, HTML, and more.
 
 [![npm](https://img.shields.io/npm/v/vue2-sfc-document.svg)](https://www.npmjs.com/package/vue2-sfc-document)
 
+![](./images/scan.gif)
+
 ---
 
 ## QuickStart 快速开始
