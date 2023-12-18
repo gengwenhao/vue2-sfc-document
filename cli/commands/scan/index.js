@@ -49,7 +49,7 @@ function scanHandler(program) {
       }
 
       // 导入 ora，用于在控制台提示进度条
-      const {default: ora} = await import('ora')
+      const {default: ora} = await import(/* webpackIgnore: true */ 'ora')
       const spinner = ora(`扫描：${filePath}\n`).start()
 
       // 扫描 sfc 组件路径
