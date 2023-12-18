@@ -4,8 +4,8 @@
   "description": "解析 Vue2 SFC 自动生成文档，支持多种文档格式，包括 Markdown、Docx、PDF、HTML 等等。",
   "main": "cli/index.js",
   "scripts": {
-    "test": "jest",
     "build": "webpack -c webpack.config.js",
+    "test": "jest",
     "commitmsg": "validate-commit-msg",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "prepare": "husky install"
